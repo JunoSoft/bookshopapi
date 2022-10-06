@@ -34,5 +34,3 @@ viwerAge:{
 }
 }
 const createBook = new mongoose.model ("Books",bookSchema);
-
-module.exports.createBook = createBook;
