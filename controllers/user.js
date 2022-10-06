@@ -11,16 +11,5 @@ const joi = require ("joi");
      pageNumber:joi.Number().min(4).required(),
      viwerAge:joi.Number().required(),
    }
-const newBook =  new createBook({
-  title:body.req.title,
-  publisher:body.req.publisher,
-  author:body.req.author,
-  price:body.req.price,
-  pageNumber:body.req.pageNumber
-})
-const {error } = joi.validate(newBook,createBookSchema);
-if(error) res.status(400).send(error=>error.details[0].message)
-await newBook.save();
- };
-
+  }
 
