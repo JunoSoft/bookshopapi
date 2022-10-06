@@ -9,4 +9,4 @@ mongoose.connect("mongodb://localhost/shop")
 app.use(express.json());
 app.use("/",book);
 
-app.listen(3000,()=>console.log("server is connected on port "));
+app.listen(3000,()=>console.log("server is connected on port : 3000"));
