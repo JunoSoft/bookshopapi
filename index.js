@@ -9,5 +9,4 @@ mongoose.connect("mongodb://localhost/shop")
 app.use(express.json());
 app.use("/",book);
 
-const port = process.env.PORT || 8080;
-app.listen(port,()=>console.log("server is connected on port ",port));
+app.listen(3000,()=>console.log("server is connected on port "));
