@@ -1,26 +1,29 @@
-const {createBook} = require('../models/book')
-const joi = require ("joi");
+const { createBook } = require("../models/book");
+const joi = require("joi");
 
- exports.addBook = async (req,res)=>{
+exports.addBook = async (req, res) => {
+  const createBookSchema = {
+    title: joi.string().min(4).max(1024).trim().required(),
+    publisher: joi.string().min(4).max(64).trim().required(),
+    author: joi.string().min(4).trim().required(),
+    price: joi.number().required(),
+    pageNumber: joi.number().min(4).required(),
+    viwerAge: joi.number().required(),
+    store: joi.number().required(),
+  };
+  const newBook = new createBook({
+    title: req.body.title,
+    publisher: req.body.publisher,
+    author: req.body.author,
+    price: req.body.price,
+    pageNumber: req.body.pageNumber,
+    store: req.body.store,
+  });
+  const { error } = joi.validate(req.body, createBookSchema);
+  if (error) res.status(400).send((error) => error.details[0].message);
+  
 
-   const createBookSchema = {
-     title:joi.String().min(4).max(1024).required(),
-     publisher:joi.String().min(4).max(64).required(),
-     author:joi.String().min(4).required(),
-     price:joi.Number().max(1024).required(),
-     pageNumber:joi.Number().min(4).required(),
-     viwerAge:joi.Number().required(),
-   }
-const newBook =  new createBook({
-  title:body.req.title,
-  publisher:body.req.publisher,
-  author:body.req.author,
-  price:body.req.price,
-  pageNumber:body.req.pageNumber
-})
-const {error } = joi.validate(newBook,createBookSchema);
-if(error) res.status(400).send(error=>error.details[0].message)
-await newBook.save();
- };
-
-
+  const result = await newBook.save();
+  res.send(result)
+  console.log(result);
+};
